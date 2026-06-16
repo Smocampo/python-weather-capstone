@@ -35,15 +35,13 @@ def scrape_weather():
         
         try:
             driver.get(url)
-            time.sleep(1.5) # Short sleep to be responsible and let elements load
+            time.sleep(1.5) 
             
-            # Extract the temperature element (id="qlook" contains the quick overview)
             qlook = driver.find_element(By.ID, "qlook")
             
-            # The temperature value is inside a class called 'h2' or raw text within qlook
             temp_text = qlook.find_element(By.CLASS_NAME, "h2").text.strip()
             
-            # The condition text (e.g., "Passing clouds.") is inside the paragraph right after the temperature
+        
             condition_text = qlook.find_element(By.TAG_NAME, "p").text.strip()
             
             scraped_rows.append({
