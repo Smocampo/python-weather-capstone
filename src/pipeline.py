@@ -18,7 +18,6 @@ def clean_and_transform_data():
     for index, row in df.iterrows():
         raw_temp = str(row["Temperature"])
         
-        # Strip away degree symbols, F, C, and spaces to isolate the raw digits
         just_digits = raw_temp.replace("°F", "").replace("°C", "").replace("°", "").strip()
         
         try:
@@ -26,7 +25,6 @@ def clean_and_transform_data():
         except ValueError:
             clean_temps.append(None)
 
-    # Replace the old text temperature column with our clean integers
     df["Temperature"] = clean_temps
     
     # Drop rows missing numerical data and clear out duplicates to protect DB health
@@ -36,7 +34,7 @@ def clean_and_transform_data():
     print("\nCleaned DataFrame Preview:")
     print(df)
     
-    # --- SQLITE MIGRATION ---
+    #SQLITE MIGRATION
     db_dir = "data"
     os.makedirs(db_dir, exist_ok=True)
     db_path = os.path.join(db_dir, "weather_data.db")
